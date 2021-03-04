@@ -1,0 +1,7 @@
+* Hateoas
+* Validation
+* Tests (JUnit et Postman)
+* Docker
+* Oauth
+* Observability
+* Full
