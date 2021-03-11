@@ -1,5 +1,7 @@
-FROM openjdk:11.0.10
+FROM gcr.io/distroless/java:11
 VOLUME /tmp
-ADD target/intervenant-service-1.0.jar intervenant-service.jar
-RUN bash -c 'touch /intervenant-service.jar'
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev./urandom","-jar","/intervenant-service.jar"]
+ARG DEPENDENCY=target/dependency
+COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY ${DEPENDENCY}/META-INF /app/META-INF
+COPY ${DEPENDENCY}/BOOT-INF/classes /app
+ENTRYPOINT ["java","-cp","app:app/lib/*","org.miage.intervenantservice.IntervenantServiceApplication"]
