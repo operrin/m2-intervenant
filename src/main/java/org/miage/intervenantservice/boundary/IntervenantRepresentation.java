@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 import org.miage.intervenantservice.entity.Intervenant;
+import org.miage.intervenantservice.entity.IntervenantInput;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -57,7 +60,7 @@ public class IntervenantRepresentation {
     // POST
     @PostMapping
     @Transactional
-    public ResponseEntity<?> saveIntervenant(@RequestBody Intervenant intervenant) {
+    public ResponseEntity<?> saveIntervenant(@RequestBody @Valid IntervenantInput intervenant) {
         Intervenant intervenant2Save = new Intervenant(
             UUID.randomUUID().toString(),
             intervenant.getNom(),
